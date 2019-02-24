@@ -1,0 +1,14 @@
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\bin\Debug\netcoreapp2.2\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\bin\Debug\netcoreapp2.2\xunit.runner.reporters.netcoreapp10.dll
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\bin\Debug\netcoreapp2.2\xunit.runner.utility.netcoreapp10.dll
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\bin\Debug\netcoreapp2.2\UnitTests.deps.json
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\bin\Debug\netcoreapp2.2\UnitTests.runtimeconfig.json
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\bin\Debug\netcoreapp2.2\UnitTests.runtimeconfig.dev.json
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\bin\Debug\netcoreapp2.2\UnitTests.dll
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\bin\Debug\netcoreapp2.2\UnitTests.pdb
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\obj\Debug\netcoreapp2.2\UnitTests.csprojAssemblyReference.cache
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\obj\Debug\netcoreapp2.2\UnitTests.csproj.CoreCompileInputs.cache
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\obj\Debug\netcoreapp2.2\UnitTests.AssemblyInfoInputs.cache
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\obj\Debug\netcoreapp2.2\UnitTests.AssemblyInfo.cs
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\obj\Debug\netcoreapp2.2\UnitTests.dll
+D:\StudentDegreePlan\WebApplication1\tests\UnitTests\obj\Debug\netcoreapp2.2\UnitTests.pdb
