@@ -12072,23 +12072,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\S534049\\.nuget\\packages\\": {},
+    "C:\\Users\\s533725\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\StudentDegreePlan\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\s533725\\Documents\\44663\\StudentDegreePlan\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "D:\\StudentDegreePlan\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
-      "packagesPath": "C:\\Users\\S534049\\.nuget\\packages\\",
-      "outputPath": "D:\\StudentDegreePlan\\WebApplication1\\WebApplication1\\obj\\",
+      "projectPath": "C:\\Users\\s533725\\Documents\\44663\\StudentDegreePlan\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "packagesPath": "C:\\Users\\s533725\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\s533725\\Documents\\44663\\StudentDegreePlan\\WebApplication1\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\S534049\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\s533725\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
