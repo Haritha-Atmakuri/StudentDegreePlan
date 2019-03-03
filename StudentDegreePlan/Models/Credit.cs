@@ -2,7 +2,7 @@ using System;
 using System.Collection.Generic;
 
 
-namespace WebApplication1.Models
+namespace StudentDegreePlan.Models
 {
     public class Credit{
         public int ID { get; set; }

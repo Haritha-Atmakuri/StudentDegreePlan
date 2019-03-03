@@ -1,8 +1,8 @@
-using DegreePlan.Models;
+using StudentDegreePlan.Models;
 using System;
 using System.Linq;
 
-namespace WebApplication1.Data
+namespace StudentDegreePlan.Data
 {
     public static class DbInitializer
     {

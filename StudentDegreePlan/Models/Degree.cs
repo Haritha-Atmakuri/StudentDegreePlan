@@ -2,7 +2,7 @@ using System;
 using System.Collection.Generic;
 
 
-namespace DegreePlan.Models
+namespace StudentDegreePlan.Models
 {
     public class Degree
     {
