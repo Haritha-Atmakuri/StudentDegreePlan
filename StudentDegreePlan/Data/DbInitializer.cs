@@ -11,7 +11,7 @@ namespace StudentDegreePlan.Data
             //context.Database.EnsureCreated();
 
             // Look for any Degrees.
-            if (context.Degrees.Any())
+            if (context.Degree.Any())
             {
                 Console.WriteLine("Degrees already exist.");
             }
@@ -61,10 +61,63 @@ namespace StudentDegreePlan.Data
                 }
                 context.SaveChanges();
             }
-           
-            
 
+
+            //Degree Credit
+             if (context.DegreeCredit.Any())
+            {
+                Console.WriteLine("Degree Credit already exists!");
+            }
+            else
+            {
+                var degree = new DegreeCredit[]
+                {
+                    new DegreeCredit{DegreeCreditID = 1, DegreeID = '1' , CreditID = '460'}
+                    new DegreeCredit{DegreeCreditID = 2, DegreeID = '1' , CreditID = '356'}
+                    new DegreeCredit{DegreeCreditID = 3, DegreeID = '1' , CreditID = '542'}
+                    new DegreeCredit{DegreeCreditID = 4, DegreeID = '1' , CreditID = '563'}
+                    new DegreeCredit{DegreeCreditID = 5, DegreeID = '1' , CreditID = '560'}
+                    new DegreeCredit{DegreeCreditID = 6, DegreeID = '1' , CreditID = '618'}
+                    new DegreeCredit{DegreeCreditID = 7, DegreeID = '1' , CreditID = '618'}
+                    new DegreeCredit{DegreeCreditID = 8, DegreeID = '1' , CreditID = '555'}
+                    new DegreeCredit{DegreeCreditID = 9, DegreeID = '1' , CreditID = '691'}
+                    new DegreeCredit{DegreeCreditID = 10, DegreeID = '1' , CreditID = '692'}
+                    new DegreeCredit{DegreeCreditID = 11, DegreeID = '1' , CreditID = '6'}
+                    new DegreeCredit{DegreeCreditID = 12, DegreeID = '1' , CreditID = '10'}
+                    new DegreeCredit{DegreeCreditID = 13, DegreeID = '1' , CreditID = '20'}
+
+                };  
+                Console.WriteLine($"Inserted {DegreeCredit.Length} new degree requirements");
+                foreach (DegreeCredit d in degree){
+                        context.DegreeCredit.Add(d);
+                }
+                context.SaveChanges();
+            }
+
+            //Student Term
+
+            if (context.StudentTerm.Any())
+            {
+                Console.WriteLine("Student Term Requirements already exists!");
+            }
+            else
+            {
+                var studentTerm = new StudentTerm[]
+                {
+                    new StudentTerm{StudentTermID=11,StudentID=533726,DegreePlanID=7254,Term=1,TermAbbr=S19,TermName=Spring2019,No.OfCoursesTaken=4}
+                    new StudentTerm{StudentTermID=12,StudentID=533726,DegreePlanID=7254,Term=2,TermAbbr=Su19,TermName=Summer2019,No.OfCoursesTaken=0}
+                    new StudentTerm{StudentTermID=13,StudentID=533726,DegreePlanID=7254,Term=3,TermAbbr=F19,TermName=Fall2019,No.OfCoursesTaken=3}
+                    new StudentTerm{StudentTermID=14,StudentID=533726,DegreePlanID=7254,Term=4,TermAbbr=S20,TermName=Spring2020,No.OfCoursesTaken=3}
+                    new StudentTerm{StudentTermID=15,StudentID=533726,DegreePlanID=7254,Term=5,TermAbbr=Su20,TermName=Summer2020,No.OfCoursesTaken=3}
+
+                };
+                Console.WriteLine($"Inserted {studentTerm.Length} new student terms");
+                foreach (StudentTerm st in studentTerm)
+                {
+                    context.StudentTerm.Add(d);
+                }
+                context.SaveChanges();
+            }    
         }
-
     }
 }
