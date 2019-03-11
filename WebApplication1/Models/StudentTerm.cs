@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication1.Models
 {
     public class StudentTerm
     {
+     [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int StudentTermID { get; set; }
         public int Term { get; set;} 
         public string TermAbbr {get; set;}

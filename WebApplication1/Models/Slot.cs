@@ -1,21 +1,23 @@
 using System;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication1.Models
 {
     public class Slot
     {
-        public int ID { get; set; }
+         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int SlotID { get; set; }
         public string Status { get; set; }
-
-        //public DegreePlan Degreeplan { get; set; }
+        
+        public int DegreePlanID { get; set; }
         //[ForeignKey("DegreePlanID")]
 
-        //public Term Term { get; set }
+        public int Term { get; set; }
         //[ForeignKey("TermID")]
 
-        //public Credit Credit { get; set }
+        public int CreditID { get; set; }
         //[ForeignKey("CreditID")]
+       
     }
 }
