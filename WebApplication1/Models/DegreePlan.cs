@@ -12,8 +12,10 @@ namespace WebApplication1.Models
         public string DegreePlanName { get; set;}
         public int DegreeId { get; set;}
 
-        //foreign key[("StudentID")]
-        //public  StudentID Student { get; set;}
+       public Student Student { get; set; }
+        public Degree Degree { get; set; }
+
+      
 
     }
 }

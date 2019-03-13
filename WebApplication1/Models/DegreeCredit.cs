@@ -10,9 +10,9 @@ namespace WebApplication1.Models
          [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int DegreeCreditID{ get; set; }
         public string DegreeID { get; set;}
-      //  [ForeignKey("CreditID")]
+      
         public int CreditID { get; set;}
-       
+       public Credit Credit { get; set; }
          
     }
 }

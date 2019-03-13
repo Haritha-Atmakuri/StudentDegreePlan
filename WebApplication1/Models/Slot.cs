@@ -11,13 +11,17 @@ namespace WebApplication1.Models
         public string Status { get; set; }
         
         public int DegreePlanID { get; set; }
-        //[ForeignKey("DegreePlanID")]
+        
 
         public int Term { get; set; }
-        //[ForeignKey("TermID")]
+        
 
         public int CreditID { get; set; }
-        //[ForeignKey("CreditID")]
+        
+        public DegreePlan DegreePlan { get; set; }
+        public Student Student { get; set; }
+   
+
        
     }
 }
