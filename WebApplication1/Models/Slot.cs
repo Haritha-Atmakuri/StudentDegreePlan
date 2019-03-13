@@ -19,7 +19,7 @@ namespace WebApplication1.Models
         public int CreditID { get; set; }
         
         public DegreePlan DegreePlan { get; set; }
-        public Student Student { get; set; }
+       
    
 
        
