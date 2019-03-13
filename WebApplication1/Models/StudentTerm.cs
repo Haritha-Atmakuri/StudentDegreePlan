@@ -14,10 +14,11 @@ namespace WebApplication1.Models
         public int NoOfCoursesTaken {get; set;}
 
         public int StudentID { get; set; }
-        //[ForeignKey("StudentID")]
+       public Student Student { get; set; }
 
         public int DegreePlanID { get; set; }
-        //[ForeignKey("DegreePlanID")]
+        public DegreePlan DegreePlan { get; set; }
+        
 
     }
 }
