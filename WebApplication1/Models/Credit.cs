@@ -1,16 +1,30 @@
 using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication1.Models
 {
-    public class Credit{
-         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CreditID { get; set; }
-        public string CreditAbv { get; set; }
+    public class Credit
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int CreditId { get; set; }
+        [StringLength(10)]
+        public string CreditAbbr { get; set; }
+        [StringLength(20)]
         public string CreditName { get; set; }
+        [Range(0,1)]
         public int IsSummer { get; set; }
+        [Range(0, 1)]
         public int IsSpring { get; set; }
-        public int IsFall { get; set ;}
+        [Range(0, 1)]
+        public int IsFall { get; set; }
+
+
+
+
+       
+
+
     }
 }

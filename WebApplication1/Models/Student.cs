@@ -1,18 +1,24 @@
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 
 namespace WebApplication1.Models
 {
     public class Student
     {
-         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public int StudentID {get; set;}
-    public string FamilyName {get; set;}
-    public string GivenName { get; set; }
-    public string Sid { get; set;}
-    public int CatPawsID { get; set;} 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int StudentId { get; set; }
+        [DisplayName("Family Name")]
+        [StringLength(15)]
+        public string Family { get; set; }
+        [DisplayName("Given Name")]
+        [StringLength(25)]
+        public string Given { get; set; }
+        public int N919 { get; set; }
+
+
+
     }
-    
 }
