@@ -10,14 +10,14 @@ namespace WebApplication1.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int DegreePlanId { get; set; }      
-       // [DisplayName("Student")]
+       [DisplayName("Student")]
         public int StudentId { get; set; }
-      //  [DisplayName("Plan")]
+      [DisplayName("Plan")]
         public string DegreePlanAbbr { get; set; }
-       // [DisplayName("Plan Name")]
-     //   [StringLength(25)]
+       [DisplayName("Plan Name")]
+     [StringLength(25)]
         public string DegreePlanName { get; set; }
-    //    public int DegreePlanSelected { get; set; }
+    
         public Student Student { get; set; }
 
     }

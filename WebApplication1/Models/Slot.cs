@@ -9,8 +9,6 @@ namespace WebApplication1.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SlotId { get; set; }
-        //   [ForeignKey("DegreePlanSelected")]    
-        //   public int DegreePlanSelected { get; set; }
         public int DegreePlanId { get; set; }
         public int Term { get; set; }
         public int CreditId { get; set; }

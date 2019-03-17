@@ -13,7 +13,6 @@ namespace WebApplication1.Models
         public int Term { get; set; }
         public string TermAbbr { get; set; }
         public string TermName { get; set; }
-
         public Student Student { get; set; }
 
     }
