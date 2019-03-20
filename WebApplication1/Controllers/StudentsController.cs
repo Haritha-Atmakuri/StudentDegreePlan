@@ -20,9 +20,35 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(String sortOrder, string searchString)
         {
-            return View(await _context.Students.ToListAsync());
+           ViewData["FamilySortParm"] = String.IsNullOrEmpty(sortOrder) ? "Fname_desc" : "";
+            ViewData["GivenSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Gname_desc" : "";
+            ViewData["N919SortParm"] = sortOrder == "N919" ? "N919_desc" : "N919_desc";
+            ViewData["CurrentFilter"] = searchString;
+            var students = from s in _context.Students
+                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.Family.Contains(searchString)
+                                       || s.Given.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "Fname_desc":
+                    students = students.OrderByDescending(s => s.Family);
+                    break;
+                case "Gname_desc":
+                    students = students.OrderBy(s => s.Given);
+                    break;
+                case "N919_desc":
+                    students = students.OrderByDescending(s => s.N919);
+                    break;
+                default:
+                    students = students.OrderBy(s => s.StudentId);
+                    break;
+            }
+            return View(await students.AsNoTracking().ToListAsync());
         }
 
         // GET: Students/Details/5
