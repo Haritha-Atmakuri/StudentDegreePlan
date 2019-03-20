@@ -20,10 +20,35 @@ namespace WebApplication1.Controllers
         }
 
         // GET: StudentTerms
-        public async Task<IActionResult> Index()
+        public ActionResult Index(string sortOrder,string searchString)
         {
-            var applicationDbContext = _context.StudentTerms.Include(s => s.Student);
-            return View(await applicationDbContext.ToListAsync());
+            ViewBag.term = String.IsNullOrEmpty(sortOrder) ? "term" : "";
+            ViewBag.termabbr = sortOrder == "term_name" ? "term_abbr" : "term_name";
+            var StudentTerms = from s in _context.StudentTerms
+                           select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                StudentTerms = StudentTerms.Where(s => s.TermAbbr.Contains(searchString)
+                                       || s.TermName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "term":
+                    StudentTerms = StudentTerms.OrderByDescending(s => s.Term);
+                    break;
+                case "term_abbr":
+                    StudentTerms = StudentTerms.OrderByDescending(s => s.TermAbbr);
+                    break;
+                case "term_name":
+                    StudentTerms = StudentTerms.OrderByDescending(s => s.TermName);
+                    break;
+                default:
+                    StudentTerms = StudentTerms.OrderBy(s => s.StudentTermId);
+                    break;
+            }
+            return View(StudentTerms.AsNoTracking().ToList());
         }
 
         // GET: StudentTerms/Details/5

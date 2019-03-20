@@ -20,10 +20,32 @@ namespace WebApplication1.Controllers
         }
 
         // GET: DegreePlans
-        public async Task<IActionResult> Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            var applicationDbContext = _context.DegreePlans.Include(d => d.Student);
-            return View(await applicationDbContext.ToListAsync());
+            ViewBag.DegreePlanAbbr = String.IsNullOrEmpty(sortOrder) ? "degree_abbr" : "";
+            ViewBag.DegreePlanName = sortOrder == "DegreePlanName" ? "degree_abbr" : "degree_name";
+            var degreePlans = from s in _context.DegreePlans
+                               select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+               degreePlans = degreePlans.Where(s => s.DegreePlanAbbr.Contains(searchString)
+                                       || s.DegreePlanName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "degree_abbr":
+                    degreePlans = degreePlans.OrderByDescending(s => s.DegreePlanAbbr);
+                    break;
+                case "degree_name":
+                    degreePlans = degreePlans.OrderByDescending(s => s.DegreePlanName);
+                    break;
+                default:
+                    degreePlans = degreePlans.OrderBy(s => s.DegreePlanId);
+                    break;
+            }
+            return View(degreePlans.AsNoTracking().ToList());
         }
 
         // GET: DegreePlans/Details/5
