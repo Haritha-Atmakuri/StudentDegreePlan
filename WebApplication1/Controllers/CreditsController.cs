@@ -20,9 +20,30 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Credits
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Credits.ToListAsync());
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        {ViewData["AbvSortParm"] = String.IsNullOrEmpty(sortOrder) ? "abv_desc" : "";
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
+            var degrees = from s in _context.Credits
+                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                degrees = degrees.Where(s => s.CreditAbbr.Contains(searchString)
+                                       || s.CreditName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    degrees = degrees.OrderByDescending(s => s.CreditName);
+                    break;
+                case "abv_desc":
+                    degrees = degrees.OrderBy(s => s.CreditAbbr);
+                    break;
+                default:
+                    degrees = degrees.OrderBy(s => s.CreditId);
+                    break;
+            }
+            return View(await degrees.AsNoTracking().ToListAsync());
         }
 
         // GET: Credits/Details/5

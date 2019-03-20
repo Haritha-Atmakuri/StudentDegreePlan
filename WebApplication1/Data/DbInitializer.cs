@@ -39,7 +39,7 @@ namespace WebApplication1.Data
             if (context.Credits.Any())
             {
                 Console.WriteLine("Credits already exist.");
-                return;
+               
             }
             else
             {
@@ -75,7 +75,7 @@ namespace WebApplication1.Data
             if (context.Students.Any())
             {
                 Console.WriteLine("Students already exist.");
-                return;
+                
             }
             else
             {
@@ -101,7 +101,7 @@ namespace WebApplication1.Data
             if (context.DegreeCredits.Any())
             {
                 Console.WriteLine("DegreeCredits already exist.");
-                return;
+                
 
             }
             else
@@ -139,7 +139,7 @@ namespace WebApplication1.Data
             if (context.DegreePlans.Any())
             {
                 Console.WriteLine("Degree Plans already exist.");
-                return;
+               
             }
             else
             {
@@ -164,7 +164,7 @@ new DegreePlan {DegreePlanId=5436, StudentId=533767, DegreePlanAbbr="Slow and Co
             if (context.StudentTerms.Any())
             {
                 Console.WriteLine("Student Terms already exist.");
-                return;
+                
             }
             else
             {
@@ -202,7 +202,7 @@ new DegreePlan {DegreePlanId=5436, StudentId=533767, DegreePlanAbbr="Slow and Co
             if (context.Slots.Any())
             {
                 Console.WriteLine("Slots already exist.");
-                return;
+              
             }
             else
             {

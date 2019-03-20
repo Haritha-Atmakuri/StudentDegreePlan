@@ -245,7 +245,8 @@ namespace WebApplication1.Migrations
 
                     b.Property<string>("DegreePlanAbbr");
 
-                    b.Property<string>("DegreePlanName");
+                    b.Property<string>("DegreePlanName")
+                        .HasMaxLength(50);
 
                     b.Property<int>("StudentId");
 

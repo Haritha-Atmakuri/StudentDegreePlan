@@ -20,11 +20,44 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Slots
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            var applicationDbContext = _context.Slots.Include(s => s.Credit).Include(s => s.DegreePlan);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["StatusSortParm"] = String.IsNullOrEmpty(sortOrder) ? "status_desc" : "";
+            ViewData["CreditSortParm"] = sortOrder == "Credits" ? "credit_desc" : "Credits";
+            ViewData["TermsSortParm"] = sortOrder == "Terms" ? "term_desc" : "Term";
+            ViewData["CurrentFilter"] = searchString;
+            var slots = from s in _context.Slots
+                        select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                slots = slots.Where(s => s.Term.ToString().Contains(searchString)
+                                 || s.CreditId.ToString().Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "status_desc":
+                    slots = slots.OrderByDescending(s => s.Status);
+                    break;
+                case "credit_desc":
+                    slots = slots.OrderBy(s => s.CreditId);
+                    break;
+                case "term_desc":
+                    slots = slots.OrderByDescending(s => s.Term);
+                    break;
+                case "Cedits":
+                    slots = slots.OrderBy(s => s.CreditId);
+                    break;
+                case "Term":
+                    slots = slots.OrderByDescending(s => s.Term);
+                    break;
+                default:
+                    slots = slots.OrderBy(s => s.SlotId);
+                    break;
+            }
+
+            return View(await slots.AsNoTracking().ToListAsync());
         }
+
 
         // GET: Slots/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -164,3 +197,6 @@ namespace WebApplication1.Controllers
         }
     }
 }
+
+
+
