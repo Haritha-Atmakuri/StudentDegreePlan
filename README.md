@@ -9,3 +9,13 @@
 takehome-->30/hr multiplier-->2.5 to 3.0 billing rate-->2*30-->60 $/hr Estimated hours--> 6 hrs/week 4 wks 3 developers
 
 Cost=billing rate* total hours.
+
+
+| Take home        | 60/Hour  |
+|------------------|----------|
+| Multiplier       | 3        |
+| Billing rate     | 180/hour |
+| Hours/Work       | 10       |
+| Weeks            | 4        |
+| No of developers | 3        |
+| cost             | 19600    |
