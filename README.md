@@ -22,7 +22,9 @@ Cost=billing rate* total hours.
 
 
 Application running screenshots:
-1. ![Screenshot (318)](https://user-images.githubusercontent.com/42945822/54854416-dd323e00-4cc0-11e9-9f66-d0ed3f072fb3.png)
-2. ![Screenshot (319)](https://user-images.githubusercontent.com/42945822/54854451-f63aef00-4cc0-11e9-83b1-9105721db12d.png)
+1.  Sorting according to given
+![Screenshot (318)](https://user-images.githubusercontent.com/42945822/54854416-dd323e00-4cc0-11e9-9f66-d0ed3f072fb3.png)
+2.  searching particular attribute
+![Screenshot (319)](https://user-images.githubusercontent.com/42945822/54854451-f63aef00-4cc0-11e9-83b1-9105721db12d.png)
 
 issue tracker link: https://github.com/Haritha-Atmakuri/StudentDegreePlan/issues
