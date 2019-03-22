@@ -19,3 +19,6 @@ Cost=billing rate* total hours.
 | Weeks            | 4        |
 | No of developers | 3        |
 | cost             | 19600    |
+
+
+issue tracker link: https://github.com/Haritha-Atmakuri/StudentDegreePlan/issues
