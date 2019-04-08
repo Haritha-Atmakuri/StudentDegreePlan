@@ -10,8 +10,8 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190408205942_IntialCreate")]
-    partial class IntialCreate
+    [Migration("20190408231613_Todo")]
+    partial class Todo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -196,6 +196,8 @@ namespace WebApplication1.Migrations
                     b.Property<string>("CreditName")
                         .HasMaxLength(20);
 
+                    b.Property<bool>("Done");
+
                     b.Property<int>("IsFall");
 
                     b.Property<int>("IsSpring");
@@ -216,6 +218,8 @@ namespace WebApplication1.Migrations
 
                     b.Property<string>("DegreeName")
                         .HasMaxLength(20);
+
+                    b.Property<bool>("Done");
 
                     b.Property<int>("NumberOfTerms");
 
@@ -267,17 +271,22 @@ namespace WebApplication1.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<string>("DesiredPosition");
+                    b.Property<string>("DesiredPosition")
+                        .HasMaxLength(150);
 
-                    b.Property<string>("Family");
+                    b.Property<string>("Family")
+                        .HasMaxLength(150);
 
-                    b.Property<string>("Given");
+                    b.Property<string>("Given")
+                        .HasMaxLength(150);
 
-                    b.Property<string>("GraduationTerm");
+                    b.Property<string>("GraduationTerm")
+                        .HasMaxLength(150);
 
                     b.Property<int>("Rating");
 
-                    b.Property<string>("Skills");
+                    b.Property<string>("Skills")
+                        .HasMaxLength(150);
 
                     b.HasKey("Id");
 
@@ -308,6 +317,8 @@ namespace WebApplication1.Migrations
             modelBuilder.Entity("WebApplication1.Models.Student", b =>
                 {
                     b.Property<int>("StudentId");
+
+                    b.Property<bool>("Done");
 
                     b.Property<string>("Family")
                         .HasMaxLength(15);

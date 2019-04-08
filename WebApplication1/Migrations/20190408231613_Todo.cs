@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApplication1.Migrations
 {
-    public partial class IntialCreate : Migration
+    public partial class Todo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,7 +56,8 @@ namespace WebApplication1.Migrations
                     CreditName = table.Column<string>(maxLength: 20, nullable: true),
                     IsSummer = table.Column<int>(nullable: false),
                     IsSpring = table.Column<int>(nullable: false),
-                    IsFall = table.Column<int>(nullable: false)
+                    IsFall = table.Column<int>(nullable: false),
+                    Done = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,7 +71,8 @@ namespace WebApplication1.Migrations
                     DegreeId = table.Column<int>(nullable: false),
                     DegreeAbbr = table.Column<string>(maxLength: 10, nullable: true),
                     DegreeName = table.Column<string>(maxLength: 20, nullable: true),
-                    NumberOfTerms = table.Column<int>(nullable: false)
+                    NumberOfTerms = table.Column<int>(nullable: false),
+                    Done = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -83,11 +85,11 @@ namespace WebApplication1.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Given = table.Column<string>(nullable: true),
-                    Family = table.Column<string>(nullable: true),
-                    GraduationTerm = table.Column<string>(nullable: true),
-                    DesiredPosition = table.Column<string>(nullable: true),
-                    Skills = table.Column<string>(nullable: true),
+                    Given = table.Column<string>(maxLength: 150, nullable: true),
+                    Family = table.Column<string>(maxLength: 150, nullable: true),
+                    GraduationTerm = table.Column<string>(maxLength: 150, nullable: true),
+                    DesiredPosition = table.Column<string>(maxLength: 150, nullable: true),
+                    Skills = table.Column<string>(maxLength: 150, nullable: true),
                     Rating = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false)
                 },
@@ -103,7 +105,8 @@ namespace WebApplication1.Migrations
                     StudentId = table.Column<int>(nullable: false),
                     Family = table.Column<string>(maxLength: 15, nullable: true),
                     Given = table.Column<string>(maxLength: 25, nullable: true),
-                    N919 = table.Column<int>(nullable: false)
+                    N919 = table.Column<int>(nullable: false),
+                    Done = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

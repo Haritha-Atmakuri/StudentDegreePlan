@@ -15,6 +15,7 @@ namespace WebApplication1.Models
         public string DegreeName { get; set; }
         [Range(0, 8)]
         public int NumberOfTerms { get; set; }
+        public bool Done { get; set; }
 
 
 

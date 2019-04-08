@@ -17,6 +17,7 @@ namespace WebApplication1.Models
         [StringLength(25)]
         public string Given { get; set; }
         public int N919 { get; set; }
+        public bool Done { get; set; }
 
 
 
