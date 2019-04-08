@@ -38,7 +38,7 @@ namespace WebApplication1
            
 
                     if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-    services.AddDbContext<MyDatabaseContext>(options =>
+    services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
 else
      services.AddDbContext<ApplicationDbContext>(options =>
@@ -46,7 +46,7 @@ else
                     Configuration.GetConnectionString("DefaultConnection")));
 
 // Automatically perform database migration
-services.BuildServiceProvider().GetService<MyDatabaseContext>().Database.Migrate();
+services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
