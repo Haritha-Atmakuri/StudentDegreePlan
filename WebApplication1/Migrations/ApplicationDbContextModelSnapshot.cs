@@ -257,6 +257,31 @@ namespace WebApplication1.Migrations
                     b.ToTable("DegreePlan");
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.Developer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("DesiredPosition");
+
+                    b.Property<string>("Family");
+
+                    b.Property<string>("Given");
+
+                    b.Property<string>("GraduationTerm");
+
+                    b.Property<int>("Rating");
+
+                    b.Property<string>("Skills");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Develper");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.Slot", b =>
                 {
                     b.Property<int>("SlotId");

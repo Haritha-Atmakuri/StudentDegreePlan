@@ -21,7 +21,8 @@ namespace WebApplication1.Data
         public DbSet<DegreePlan> DegreePlans {get; set;}
         public DbSet<StudentTerm> StudentTerms { get; set; }
         public DbSet<Slot> Slots {get; set;}
-      
+        
+        public DbSet<Developer> Developers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -32,6 +33,7 @@ namespace WebApplication1.Data
             modelBuilder.Entity<DegreePlan>().ToTable("DegreePlan");            
             modelBuilder.Entity<Slot>().ToTable("Slot");
             modelBuilder.Entity<StudentTerm>().ToTable("StudentTerm");
+            modelBuilder.Entity<Developer>().ToTable("Develper");
         }
     }
 }
