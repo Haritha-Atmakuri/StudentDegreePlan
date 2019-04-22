@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,7 +19,7 @@ namespace WebApplication1.Models
         public string Given { get; set; }
         public int N919 { get; set; }
         public bool Done { get; set; }
-
+        public ICollection<DegreePlan> DegreePlans { get; set; }
 
 
     }

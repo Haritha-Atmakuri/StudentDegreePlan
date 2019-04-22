@@ -114,7 +114,7 @@ namespace WebApplication1.Data
                         new DegreeCredit {DegreeCreditId=4, DegreeId=1, CreditId=563},
                         new DegreeCredit {DegreeCreditId=5, DegreeId=1, CreditId=560},
                         new DegreeCredit {DegreeCreditId=6, DegreeId=1, CreditId=618},
-                        new DegreeCredit {DegreeCreditId=7, DegreeId=1, CreditId=618},
+                        new DegreeCredit {DegreeCreditId=7, DegreeId=1, CreditId=664},
                         new DegreeCredit {DegreeCreditId=8, DegreeId=1, CreditId=555},
                         new DegreeCredit {DegreeCreditId=9, DegreeId=1, CreditId=691},
                         new DegreeCredit {DegreeCreditId=10, DegreeId=1, CreditId=692},

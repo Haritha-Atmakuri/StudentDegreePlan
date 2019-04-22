@@ -403,7 +403,7 @@ namespace WebApplication1.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WebApplication1.Models.Degree", "Degree")
-                        .WithMany()
+                        .WithMany("DegreeCredits")
                         .HasForeignKey("DegreeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -411,7 +411,7 @@ namespace WebApplication1.Migrations
             modelBuilder.Entity("WebApplication1.Models.DegreePlan", b =>
                 {
                     b.HasOne("WebApplication1.Models.Student", "Student")
-                        .WithMany()
+                        .WithMany("DegreePlans")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
