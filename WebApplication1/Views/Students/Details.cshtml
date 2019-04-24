@@ -37,11 +37,14 @@
                 </tr>
                 @foreach (var item in Model.DegreePlans.OrderBy(r => r.DegreePlanId))
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.DegreePlanAbbr) </td>
-                        <td>@Html.DisplayFor(modelItem => item.DegreePlanName) </td>
-                        
-                    </tr>
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.DegreePlanAbbr) </td>
+                    <td>@Html.DisplayFor(modelItem => item.DegreePlanName) </td>
+                    <td>
+                        <a asp-action="Edit" asp-controller="DegreePlans" asp-route-id="@item.DegreePlanId">Plan</a>
+                    </td>
+
+                </tr>
                 }
             </table>
         </dd>
