@@ -28,3 +28,4 @@ Application running screenshots:
 ![Screenshot (319)](https://user-images.githubusercontent.com/42945822/54854451-f63aef00-4cc0-11e9-83b1-9105721db12d.png)
 
 issue tracker link: https://github.com/Haritha-Atmakuri/StudentDegreePlan/issues
+commits link: https://github.com/Haritha-Atmakuri/StudentDegreePlan/commits/master
