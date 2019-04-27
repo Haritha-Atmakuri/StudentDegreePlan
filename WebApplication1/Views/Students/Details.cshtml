@@ -4,50 +4,70 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h2>Details</h2>
 
 <div>
     <h4>Student</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Family)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Family)
-        </dd>
-        <dt class="col-sm-2">
+    <dl class="dl-horizontal">
+        <dt>
             @Html.DisplayNameFor(model => model.Given)
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Given)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.N919)
+        <dt>
+            @Html.DisplayNameFor(model => model.Family)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.N919)
+        <dd>
+            @Html.DisplayFor(model => model.Family)
         </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DegreePlans)
+        </dt>
         <dd>
             <table class="table">
                 <tr>
-                    <th>Number</th>
-                    <th>Abbrev</th>
-                    
+                    <th>Degree</th>
+                    <th>Plan Number</th>
+                    <th>Plan Abbrev</th>
+                    <th>Plan Name</th>
+                    <th>Degree Status</th>
+                    <th>Includes Internship?</th>
+                    <th>More</th>
                 </tr>
-                @foreach (var item in Model.DegreePlans.OrderBy(r => r.DegreePlanId))
+                @foreach (var item in Model.DegreePlans.OrderBy(p => p.DegreeId))
                 {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.DegreePlanAbbr) </td>
-                    <td>@Html.DisplayFor(modelItem => item.DegreePlanName) </td>
-                    <td>
-                        <a asp-action="Edit" asp-controller="DegreePlans" asp-route-id="@item.DegreePlanId">Plan</a>
-                    </td>
-
-                </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DegreePlanId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DegreeId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StudentId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DegreePlanAbbr)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DegreePlanName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Done)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-controller="DegreePlans" asp-route-id="@item.DegreePlanId">Plan</a>
+                        </td>
+                    </tr>
                 }
             </table>
         </dd>
+
+
     </dl>
 </div>
 <div>

@@ -16,24 +16,29 @@ namespace WebApplication1.Data
         public DbSet<Degree> Degrees { get; set; }
         public DbSet<Credit> Credits {get; set;}
         public DbSet<Student> Students { get; set; }
+        public DbSet<DegreePlan> DegreePlans { get; set; }
+        public DbSet<Slot> Slots { get; set; }
         public DbSet<DegreeCredit> DegreeCredits {get; set;}
        
-        public DbSet<DegreePlan> DegreePlans {get; set;}
+       
         public DbSet<StudentTerm> StudentTerms { get; set; }
-        public DbSet<Slot> Slots {get; set;}
+      
         
-        public DbSet<Developer> Developers { get; set; }
+      
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Degree>().ToTable("Degree");
             modelBuilder.Entity<Credit>().ToTable("Credit");
             modelBuilder.Entity<Student>().ToTable("Student");
-            modelBuilder.Entity<DegreeCredit>().ToTable("DegreeCredit");
-            modelBuilder.Entity<DegreePlan>().ToTable("DegreePlan");            
+            modelBuilder.Entity<DegreePlan>().ToTable("DegreePlan");
+
             modelBuilder.Entity<Slot>().ToTable("Slot");
+
+            modelBuilder.Entity<DegreeCredit>().ToTable("DegreeCredit");
+                    
             modelBuilder.Entity<StudentTerm>().ToTable("StudentTerm");
-            modelBuilder.Entity<Developer>().ToTable("Develper");
+           // modelBuilder.Entity<Developer>().ToTable("Develper");
         }
     }
 }

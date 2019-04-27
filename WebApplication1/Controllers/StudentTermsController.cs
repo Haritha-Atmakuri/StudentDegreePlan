@@ -20,35 +20,10 @@ namespace WebApplication1.Controllers
         }
 
         // GET: StudentTerms
-        public ActionResult Index(string sortOrder,string searchString)
+        public async Task<IActionResult> Index()
         {
-            ViewBag.term = String.IsNullOrEmpty(sortOrder) ? "term" : "";
-            ViewBag.termabbr = sortOrder == "term_name" ? "term_abbr" : "term_name";
-            var StudentTerms = from s in _context.StudentTerms
-                           select s;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                StudentTerms = StudentTerms.Where(s => s.TermAbbr.Contains(searchString)
-                                       || s.TermName.Contains(searchString));
-            }
-
-            switch (sortOrder)
-            {
-                case "term":
-                    StudentTerms = StudentTerms.OrderByDescending(s => s.Term);
-                    break;
-                case "term_abbr":
-                    StudentTerms = StudentTerms.OrderByDescending(s => s.TermAbbr);
-                    break;
-                case "term_name":
-                    StudentTerms = StudentTerms.OrderByDescending(s => s.TermName);
-                    break;
-                default:
-                    StudentTerms = StudentTerms.OrderBy(s => s.StudentTermId);
-                    break;
-            }
-            return View(StudentTerms.AsNoTracking().ToList());
+            var applicationDbContext = _context.StudentTerms.Include(s => s.DegreePlan);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: StudentTerms/Details/5
@@ -60,7 +35,7 @@ namespace WebApplication1.Controllers
             }
 
             var studentTerm = await _context.StudentTerms
-                .Include(s => s.Student)
+                .Include(s => s.DegreePlan)
                 .FirstOrDefaultAsync(m => m.StudentTermId == id);
             if (studentTerm == null)
             {
@@ -73,7 +48,7 @@ namespace WebApplication1.Controllers
         // GET: StudentTerms/Create
         public IActionResult Create()
         {
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId");
+            ViewData["DegreePlanId"] = new SelectList(_context.DegreePlans, "DegreePlanId", "DegreePlanId");
             return View();
         }
 
@@ -82,7 +57,7 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StudentTermId,StudentId,Term,TermAbbr,TermName")] StudentTerm studentTerm)
+        public async Task<IActionResult> Create([Bind("StudentTermId,Term,TermAbbr,TermName,DegreePlanId,Done")] StudentTerm studentTerm)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +65,7 @@ namespace WebApplication1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", studentTerm.StudentId);
+            ViewData["DegreePlanId"] = new SelectList(_context.DegreePlans, "DegreePlanId", "DegreePlanId", studentTerm.DegreePlanId);
             return View(studentTerm);
         }
 
@@ -107,7 +82,7 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", studentTerm.StudentId);
+            ViewData["DegreePlanId"] = new SelectList(_context.DegreePlans, "DegreePlanId", "DegreePlanId", studentTerm.DegreePlanId);
             return View(studentTerm);
         }
 
@@ -116,7 +91,7 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StudentTermId,StudentId,Term,TermAbbr,TermName")] StudentTerm studentTerm)
+        public async Task<IActionResult> Edit(int id, [Bind("StudentTermId,Term,TermAbbr,TermName,DegreePlanId,Done")] StudentTerm studentTerm)
         {
             if (id != studentTerm.StudentTermId)
             {
@@ -143,7 +118,7 @@ namespace WebApplication1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", studentTerm.StudentId);
+            ViewData["DegreePlanId"] = new SelectList(_context.DegreePlans, "DegreePlanId", "DegreePlanId", studentTerm.DegreePlanId);
             return View(studentTerm);
         }
 
@@ -156,7 +131,7 @@ namespace WebApplication1.Controllers
             }
 
             var studentTerm = await _context.StudentTerms
-                .Include(s => s.Student)
+                .Include(s => s.DegreePlan)
                 .FirstOrDefaultAsync(m => m.StudentTermId == id);
             if (studentTerm == null)
             {

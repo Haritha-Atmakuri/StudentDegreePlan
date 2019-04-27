@@ -20,38 +20,10 @@ namespace WebApplication1.Controllers
         }
 
         // GET: DegreeCredits
-        public async Task<IActionResult> Index(String sortOrder, string searchString)
+        public async Task<IActionResult> Index()
         {
-            ViewData["DegreeIdParm"] = String.IsNullOrEmpty(sortOrder) ? "DegreeId_desc" : "";
-            ViewData["RequirementIdParm"] = sortOrder == "RequirementId" ? "ReauirementId_desc" : "RequirementId";
-            ViewData["CurrentFilter"] = searchString;
-            var degreereq = from s in _context.DegreeCredits
-                            select s;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                degreereq = degreereq.Where(s => s.DegreeId.ToString().Contains(searchString)
-                                       || s.CreditId.ToString().Contains(searchString));
-            }
-
-            switch (sortOrder)
-            {
-                case "DegreeId_desc":
-                    degreereq = degreereq.OrderByDescending(s => s.DegreeId);
-                    break;
-
-                case "RequirementId":
-                    degreereq = degreereq.OrderBy(s => s.CreditId);
-                    break;
-                case "ReauirementId_desc":
-                    degreereq = degreereq.OrderByDescending(s => s.CreditId);
-                    break;
-                default:
-                    degreereq = degreereq.OrderBy(s => s.DegreeCreditId);
-                    break;
-            }
-        
-            return View(await degreereq.AsNoTracking().ToListAsync());
+            var applicationDbContext = _context.DegreeCredits.Include(d => d.Credit).Include(d => d.Degree);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: DegreeCredits/Details/5
@@ -87,7 +59,7 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DegreeCreditId,DegreeId,CreditId,Done")] DegreeCredit degreeCredit)
+        public async Task<IActionResult> Create([Bind("DegreeCreditId,DegreeId,CreditId")] DegreeCredit degreeCredit)
         {
             if (ModelState.IsValid)
             {

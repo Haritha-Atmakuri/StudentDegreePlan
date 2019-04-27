@@ -9,29 +9,17 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Find by Degree Name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
-        </p>
-    </div>
-</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["AbbrSortParm"]">@Html.DisplayNameFor(model => model.DegreeAbbr)</a>
+                @Html.DisplayNameFor(model => model.DegreeAbbr)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.DegreeName)</a>
+                @Html.DisplayNameFor(model => model.DegreeName)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["TermsSortParm"]">@Html.DisplayNameFor(model => model.NumberOfTerms)</a>
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Done)
+                @Html.DisplayNameFor(model => model.NumberOfTerms)
             </th>
             <th></th>
         </tr>
@@ -48,10 +36,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NumberOfTerms)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Done)
-            </td>
-
             <td>
                 <a asp-action="Edit" asp-route-id="@item.DegreeId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.DegreeId">Details</a> |

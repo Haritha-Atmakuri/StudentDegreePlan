@@ -45,19 +45,19 @@ namespace WebApplication1.Data
             {
                 var credits = new Credit[]
                 {
-                    new Credit {CreditId=460, CreditAbbr="DB", CreditName="Databases", IsSummer=0, IsSpring=1, IsFall=1},
-                    new Credit {CreditId=356, CreditAbbr="NF", CreditName="Network Fundamentals", IsSummer=0, IsSpring=1, IsFall=1},
-                    new Credit {CreditId=542, CreditAbbr="542", CreditName="OOPS with Java", IsSummer=0, IsSpring=1, IsFall=1},
-                    new Credit {CreditId=563, CreditAbbr="563", CreditName="Web Apps", IsSummer=0, IsSpring=1, IsFall=1},
-                    new Credit {CreditId=560, CreditAbbr="560", CreditName="Advanced Databases", IsSummer=1, IsSpring=1, IsFall=1},
-                    new Credit {CreditId=664, CreditAbbr="664-UX", CreditName="User Experience", IsSummer=0, IsSpring=1, IsFall=1},
-                    new Credit {CreditId=618, CreditAbbr="618-PM", CreditName="Project Management", IsSummer=1, IsSpring=0, IsFall=0},
-                    new Credit {CreditId=555, CreditAbbr="555-NS", CreditName="Network Security", IsSummer=0, IsSpring=1, IsFall=1},
-                    new Credit {CreditId=691, CreditAbbr="691-GDP1", CreditName="GDP1", IsSummer=0, IsSpring=1, IsFall=1},
-                    new Credit {CreditId=692, CreditAbbr="692-GDP2", CreditName="GDP2", IsSummer=0, IsSpring=1, IsFall=1},
-                    new Credit {CreditId=6, CreditAbbr="Mobile", CreditName="643 or 644 Mobile", IsSummer=0, IsSpring=1, IsFall=1},
-                    new Credit {CreditId=10, CreditAbbr="E1", CreditName="Elective 1", IsSummer=0, IsSpring=1, IsFall=1},
-                    new Credit {CreditId=20, CreditAbbr="E2", CreditName="Elective 2", IsSummer=0, IsSpring=1, IsFall=1},
+                    new Credit {CreditId=460, DegreeId = 1,CreditAbbr="DB", CreditName="Databases", IsSummer=0, IsSpring=1, IsFall=1},
+                    new Credit {CreditId=356, DegreeId = 1,CreditAbbr="NF", CreditName="Network Fundamentals", IsSummer=0, IsSpring=1, IsFall=1},
+                    new Credit {CreditId=542, DegreeId = 1,CreditAbbr="542", CreditName="OOPS with Java", IsSummer=0, IsSpring=1, IsFall=1},
+                    new Credit {CreditId=563, DegreeId = 1,CreditAbbr="563", CreditName="Web Apps", IsSummer=0, IsSpring=1, IsFall=1},
+                    new Credit {CreditId=560,DegreeId = 1, CreditAbbr="560", CreditName="Advanced Databases", IsSummer=1, IsSpring=1, IsFall=1},
+                    new Credit {CreditId=664,DegreeId = 1, CreditAbbr="664-UX", CreditName="User Experience", IsSummer=0, IsSpring=1, IsFall=1},
+                    new Credit {CreditId=618,DegreeId = 1, CreditAbbr="618-PM", CreditName="Project Management", IsSummer=1, IsSpring=0, IsFall=0},
+                    new Credit {CreditId=555,DegreeId = 1, CreditAbbr="555-NS", CreditName="Network Security", IsSummer=0, IsSpring=1, IsFall=1},
+                    new Credit {CreditId=691,DegreeId = 1, CreditAbbr="691-GDP1", CreditName="GDP1", IsSummer=0, IsSpring=1, IsFall=1},
+                    new Credit {CreditId=692,DegreeId = 1, CreditAbbr="692-GDP2", CreditName="GDP2", IsSummer=0, IsSpring=1, IsFall=1},
+                    new Credit {CreditId=6, DegreeId = 1,CreditAbbr="Mobile", CreditName="643 or 644 Mobile", IsSummer=0, IsSpring=1, IsFall=1},
+                    new Credit {CreditId=10, DegreeId = 1,CreditAbbr="E1", CreditName="Elective 1", IsSummer=0, IsSpring=1, IsFall=1},
+                    new Credit {CreditId=20,DegreeId = 1, CreditAbbr="E2", CreditName="Elective 2", IsSummer=0, IsSpring=1, IsFall=1},
 
                 };
                 Console.WriteLine($"Inserted {credits.Length} new credits.");
@@ -95,6 +95,65 @@ namespace WebApplication1.Data
                 context.SaveChanges();
             }
 
+            if (context.DegreePlans.Any())
+            {
+                Console.WriteLine("Degree Plans already exist.");
+
+            }
+            else
+            {
+                var degreePlans = new DegreePlan[]
+                {
+new DegreePlan {DegreePlanId=5431, DegreeId = 1,StudentId=533725, DegreePlanAbbr="Slow and easy", DegreePlanName="Take a break in summer"},
+new DegreePlan {DegreePlanId=5432, DegreeId = 1,StudentId=533725, DegreePlanAbbr="Super Fast", DegreePlanName="No break"},
+new DegreePlan {DegreePlanId=5433, DegreeId = 1,StudentId=534049, DegreePlanAbbr="Slow and easy", DegreePlanName="As fast as I Can"},
+new DegreePlan {DegreePlanId=5434, DegreeId = 1,StudentId=534049, DegreePlanAbbr="Slow and easy", DegreePlanName="Take less courses per semester"},
+new DegreePlan {DegreePlanId=5435, DegreeId = 1,StudentId=533767, DegreePlanAbbr="Super Fast", DegreePlanName="More subjects in semesters"},
+new DegreePlan {DegreePlanId=5436, DegreeId = 1,StudentId=533767, DegreePlanAbbr="Slow and Consistent", DegreePlanName="Take a break in summer"},
+                };
+                Console.WriteLine($"Inserted {degreePlans.Length} new Degree Plans.");
+
+                foreach (DegreePlan d in degreePlans)
+                {
+                    context.DegreePlans.Add(d);
+                }
+                context.SaveChanges();
+            }
+
+
+            if (context.Slots.Any())
+            {
+                Console.WriteLine("Slots already exist.");
+
+            }
+            else
+            {
+                var slots = new Slot[]
+                {
+                    new Slot {SlotId=1, DegreePlanId=5431, Term=1, CreditId=460, Status="C"},
+                    new Slot {SlotId=2, DegreePlanId=5431, Term=1, CreditId=356, Status="C"},
+                    new Slot {SlotId=3, DegreePlanId=5431, Term=1, CreditId=563, Status="C"},
+                    new Slot {SlotId=4, DegreePlanId=5431, Term=1, CreditId=542, Status="C"},
+                    new Slot {SlotId=5, DegreePlanId=5431, Term=2, CreditId=555, Status="A"},
+                    new Slot {SlotId=6, DegreePlanId=5431, Term=2, CreditId=560, Status="A"},
+                    new Slot {SlotId=7, DegreePlanId=5431, Term=2, CreditId=6, Status="A"},
+                    new Slot {SlotId=8, DegreePlanId=5431, Term=3, CreditId=10, Status="-"},
+                    new Slot {SlotId=9, DegreePlanId=5431, Term=4, CreditId=691, Status="P"},
+                    new Slot {SlotId=10, DegreePlanId=5431, Term=4, CreditId=10, Status="P"},
+                    new Slot {SlotId=11, DegreePlanId=5431, Term=5, CreditId=20, Status="P"},
+                    new Slot {SlotId=12, DegreePlanId=5431, Term=5, CreditId=692, Status="P"},
+                    new Slot {SlotId=13,DegreePlanId=5431,Term=5,CreditId=664,Status="P"},
+
+
+                };
+                Console.WriteLine($"Inserted {slots.Length} new slots.");
+
+                foreach (Slot d in slots)
+                {
+                    context.Slots.Add(d);
+                }
+                context.SaveChanges();
+            }
 
 
 
@@ -136,31 +195,7 @@ namespace WebApplication1.Data
 
           
 
-            if (context.DegreePlans.Any())
-            {
-                Console.WriteLine("Degree Plans already exist.");
-               
-            }
-            else
-            {
-                var degreePlans = new DegreePlan[]
-                {
-new DegreePlan {DegreePlanId=5431, StudentId=533725, DegreePlanAbbr="Slow and easy", DegreePlanName="Take a break in summer"},
-new DegreePlan {DegreePlanId=5432, StudentId=533725, DegreePlanAbbr="Super Fast", DegreePlanName="No break"},
-new DegreePlan {DegreePlanId=5433, StudentId=534049, DegreePlanAbbr="Slow and easy", DegreePlanName="As fast as I Can"},
-new DegreePlan {DegreePlanId=5434, StudentId=534049, DegreePlanAbbr="Slow and easy", DegreePlanName="Take less courses per semester"},
-new DegreePlan {DegreePlanId=5435, StudentId=533767, DegreePlanAbbr="Super Fast", DegreePlanName="More subjects in semesters"},
-new DegreePlan {DegreePlanId=5436, StudentId=533767, DegreePlanAbbr="Slow and Consistent", DegreePlanName="Take a break in summer"},
-                };
-                Console.WriteLine($"Inserted {degreePlans.Length} new Degree Plans.");
-
-                foreach (DegreePlan d in degreePlans)
-                {
-                    context.DegreePlans.Add(d);
-                }
-                context.SaveChanges();
-            }
-
+          
             if (context.StudentTerms.Any())
             {
                 Console.WriteLine("Student Terms already exist.");
@@ -170,21 +205,21 @@ new DegreePlan {DegreePlanId=5436, StudentId=533767, DegreePlanAbbr="Slow and Co
             {
                 var studentTerms = new StudentTerm[]
                 {
-                    new StudentTerm {StudentTermId=1, StudentId=533725, Term=1, TermAbbr="F18", TermName="Fall2018"},
-                    new StudentTerm {StudentTermId=2, StudentId=533725, Term=2, TermAbbr="s19", TermName="Spring2019"},
-                    new StudentTerm {StudentTermId=3, StudentId=533725, Term=3, TermAbbr="Su19", TermName="Summer2019"},
-                    new StudentTerm {StudentTermId=4, StudentId=533725, Term=4, TermAbbr="F19", TermName="Fall2019"},
-                    new StudentTerm {StudentTermId=5, StudentId=533725, Term=5, TermAbbr="s20", TermName="Spring2020"},
-                    new StudentTerm {StudentTermId=6, StudentId=534049, Term=1, TermAbbr="F19", TermName="Fall2019"},
-                    new StudentTerm {StudentTermId=7, StudentId=534049, Term=2, TermAbbr="s20", TermName="Spring2020"},
-                    new StudentTerm {StudentTermId=8, StudentId=534049, Term=3, TermAbbr="Su20", TermName="Summer2020"},
-                    new StudentTerm {StudentTermId=9, StudentId=534049, Term=4, TermAbbr="F20", TermName="Fall2020"},
-                    new StudentTerm {StudentTermId=10, StudentId=534049, Term=5, TermAbbr="S21", TermName="Spring2021"},
-                    new StudentTerm {StudentTermId=11, StudentId=533767, Term=1, TermAbbr="S19", TermName="Spring2019"},
-                    new StudentTerm {StudentTermId=12, StudentId=533767, Term=2, TermAbbr="Su19", TermName="Summer2019"},
-                    new StudentTerm {StudentTermId=13, StudentId=533767, Term=3, TermAbbr="F19", TermName="Fall2019"},
-                    new StudentTerm {StudentTermId=14, StudentId=533767, Term=4, TermAbbr="S20", TermName="Spring2020"},
-                    new StudentTerm {StudentTermId=15, StudentId=533767, Term=5, TermAbbr="Su20", TermName="Summer2020"},
+                    new StudentTerm {StudentTermId=1, DegreePlanId=5431, Term=1, TermAbbr="F18", TermName="Fall2018"},
+                    new StudentTerm {StudentTermId=2, DegreePlanId=5431, Term=2, TermAbbr="s19", TermName="Spring2019"},
+                    new StudentTerm {StudentTermId=3, DegreePlanId=5431, Term=3, TermAbbr="Su19", TermName="Summer2019"},
+                    new StudentTerm {StudentTermId=4, DegreePlanId=5431, Term=4, TermAbbr="F19", TermName="Fall2019"},
+                    new StudentTerm {StudentTermId=5, DegreePlanId=5431, Term=5, TermAbbr="s20", TermName="Spring2020"},
+                    new StudentTerm {StudentTermId=6, DegreePlanId=5431, Term=1, TermAbbr="F19", TermName="Fall2019"},
+                    new StudentTerm {StudentTermId=7, DegreePlanId=5431, Term=2, TermAbbr="s20", TermName="Spring2020"},
+                    new StudentTerm {StudentTermId=8, DegreePlanId=5431, Term=3, TermAbbr="Su20", TermName="Summer2020"},
+                    new StudentTerm {StudentTermId=9, DegreePlanId=5431, Term=4, TermAbbr="F20", TermName="Fall2020"},
+                    new StudentTerm {StudentTermId=10, DegreePlanId=5431, Term=5, TermAbbr="S21", TermName="Spring2021"},
+                    new StudentTerm {StudentTermId=11, DegreePlanId=5431, Term=1, TermAbbr="S19", TermName="Spring2019"},
+                    new StudentTerm {StudentTermId=12, DegreePlanId=5431, Term=2, TermAbbr="Su19", TermName="Summer2019"},
+                    new StudentTerm {StudentTermId=13, DegreePlanId=5431, Term=3, TermAbbr="F19", TermName="Fall2019"},
+                    new StudentTerm {StudentTermId=14, DegreePlanId=5431, Term=4, TermAbbr="S20", TermName="Spring2020"},
+                    new StudentTerm {StudentTermId=15, DegreePlanId=5431, Term=5, TermAbbr="Su20", TermName="Summer2020"},
 
 
                 };
@@ -199,40 +234,7 @@ new DegreePlan {DegreePlanId=5436, StudentId=533767, DegreePlanAbbr="Slow and Co
 
 
 
-            if (context.Slots.Any())
-            {
-                Console.WriteLine("Slots already exist.");
-              
-            }
-            else
-            {
-                var slots = new Slot[]
-                {
-                    new Slot {SlotId=1, DegreePlanId=5431, Term=1, CreditId=460, Status="C"},
-                    new Slot {SlotId=2, DegreePlanId=5431, Term=1, CreditId=356, Status="C"},
-                    new Slot {SlotId=3, DegreePlanId=5431, Term=1, CreditId=563, Status="C"},
-                    new Slot {SlotId=4, DegreePlanId=5431, Term=1, CreditId=542, Status="C"},
-                    new Slot {SlotId=5, DegreePlanId=5431, Term=2, CreditId=555, Status="A"},
-                    new Slot {SlotId=6, DegreePlanId=5431, Term=2, CreditId=560, Status="A"},
-                    new Slot {SlotId=7, DegreePlanId=5431, Term=2, CreditId=6, Status="A"},
-                    new Slot {SlotId=8, DegreePlanId=5431, Term=3, CreditId=10, Status="-"},
-                    new Slot {SlotId=9, DegreePlanId=5431, Term=4, CreditId=691, Status="P"},
-                    new Slot {SlotId=10, DegreePlanId=5431, Term=4, CreditId=10, Status="P"},
-                    new Slot {SlotId=11, DegreePlanId=5431, Term=5, CreditId=20, Status="P"},
-                    new Slot {SlotId=12, DegreePlanId=5431, Term=5, CreditId=692, Status="P"},
-                    new Slot {SlotId=13,DegreePlanId=5431,Term=5,CreditId=664,Status="P"},
-
-
-                };
-                Console.WriteLine($"Inserted {slots.Length} new slots.");
-
-                foreach (Slot d in slots)
-                {
-                    context.Slots.Add(d);
-                }
-                context.SaveChanges();
-            }
-
+         
            
            
 

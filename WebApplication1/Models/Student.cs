@@ -11,15 +11,21 @@ namespace WebApplication1.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int StudentId { get; set; }
+
         [DisplayName("Family Name")]
         [StringLength(15)]
         public string Family { get; set; }
+
         [DisplayName("Given Name")]
         [StringLength(25)]
         public string Given { get; set; }
+
         public int N919 { get; set; }
+
         public bool Done { get; set; }
+
         public ICollection<DegreePlan> DegreePlans { get; set; }
+        public ICollection<StudentTerm> StudentTerms { get; set; }
 
 
     }

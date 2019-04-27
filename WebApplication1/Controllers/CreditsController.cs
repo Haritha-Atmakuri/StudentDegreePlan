@@ -20,30 +20,10 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Credits
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
-        {ViewData["AbvSortParm"] = String.IsNullOrEmpty(sortOrder) ? "abv_desc" : "";
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["CurrentFilter"] = searchString;
-            var degrees = from s in _context.Credits
-                          select s;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                degrees = degrees.Where(s => s.CreditAbbr.Contains(searchString)
-                                       || s.CreditName.Contains(searchString));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    degrees = degrees.OrderByDescending(s => s.CreditName);
-                    break;
-                case "abv_desc":
-                    degrees = degrees.OrderBy(s => s.CreditAbbr);
-                    break;
-                default:
-                    degrees = degrees.OrderBy(s => s.CreditId);
-                    break;
-            }
-            return View(await degrees.AsNoTracking().ToListAsync());
+        public async Task<IActionResult> Index()
+        {
+            var applicationDbContext = _context.Credits.Include(c => c.Degree);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Credits/Details/5
@@ -55,6 +35,7 @@ namespace WebApplication1.Controllers
             }
 
             var credit = await _context.Credits
+                .Include(c => c.Degree)
                 .FirstOrDefaultAsync(m => m.CreditId == id);
             if (credit == null)
             {
@@ -67,6 +48,7 @@ namespace WebApplication1.Controllers
         // GET: Credits/Create
         public IActionResult Create()
         {
+            ViewData["DegreeId"] = new SelectList(_context.Degrees, "DegreeId", "DegreeId");
             return View();
         }
 
@@ -75,7 +57,7 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CreditId,CreditAbbr,CreditName,IsSummer,IsSpring,IsFall,Done")] Credit credit)
+        public async Task<IActionResult> Create([Bind("CreditId,CreditAbbr,CreditName,IsSummer,IsSpring,IsFall,DegreeId")] Credit credit)
         {
             if (ModelState.IsValid)
             {
@@ -83,6 +65,7 @@ namespace WebApplication1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DegreeId"] = new SelectList(_context.Degrees, "DegreeId", "DegreeId", credit.DegreeId);
             return View(credit);
         }
 
@@ -99,6 +82,7 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
+            ViewData["DegreeId"] = new SelectList(_context.Degrees, "DegreeId", "DegreeId", credit.DegreeId);
             return View(credit);
         }
 
@@ -107,7 +91,7 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CreditId,CreditAbbr,CreditName,IsSummer,IsSpring,IsFall")] Credit credit)
+        public async Task<IActionResult> Edit(int id, [Bind("CreditId,CreditAbbr,CreditName,IsSummer,IsSpring,IsFall,DegreeId")] Credit credit)
         {
             if (id != credit.CreditId)
             {
@@ -134,6 +118,7 @@ namespace WebApplication1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DegreeId"] = new SelectList(_context.Degrees, "DegreeId", "DegreeId", credit.DegreeId);
             return View(credit);
         }
 
@@ -146,6 +131,7 @@ namespace WebApplication1.Controllers
             }
 
             var credit = await _context.Credits
+                .Include(c => c.Degree)
                 .FirstOrDefaultAsync(m => m.CreditId == id);
             if (credit == null)
             {

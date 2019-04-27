@@ -20,32 +20,10 @@ namespace WebApplication1.Controllers
         }
 
         // GET: DegreePlans
-        public ActionResult Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index()
         {
-            ViewBag.DegreePlanAbbr = String.IsNullOrEmpty(sortOrder) ? "degree_abbr" : "";
-            ViewBag.DegreePlanName = sortOrder == "DegreePlanName" ? "degree_abbr" : "degree_name";
-            var degreePlans = from s in _context.DegreePlans
-                               select s;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-               degreePlans = degreePlans.Where(s => s.DegreePlanAbbr.Contains(searchString)
-                                       || s.DegreePlanName.Contains(searchString));
-            }
-
-            switch (sortOrder)
-            {
-                case "degree_abbr":
-                    degreePlans = degreePlans.OrderByDescending(s => s.DegreePlanAbbr);
-                    break;
-                case "degree_name":
-                    degreePlans = degreePlans.OrderByDescending(s => s.DegreePlanName);
-                    break;
-                default:
-                    degreePlans = degreePlans.OrderBy(s => s.DegreePlanId);
-                    break;
-            }
-            return View(degreePlans.AsNoTracking().ToList());
+            var applicationDbContext = _context.DegreePlans.Include(d => d.Degree).Include(d => d.Student);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: DegreePlans/Details/5
@@ -57,6 +35,7 @@ namespace WebApplication1.Controllers
             }
 
             var degreePlan = await _context.DegreePlans
+                .Include(d => d.Degree)
                 .Include(d => d.Student)
                 .FirstOrDefaultAsync(m => m.DegreePlanId == id);
             if (degreePlan == null)
@@ -70,6 +49,7 @@ namespace WebApplication1.Controllers
         // GET: DegreePlans/Create
         public IActionResult Create()
         {
+            ViewData["DegreeId"] = new SelectList(_context.Degrees, "DegreeId", "DegreeId");
             ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId");
             return View();
         }
@@ -79,7 +59,7 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DegreePlanId,StudentId,DegreePlanAbbr,DegreePlanName")] DegreePlan degreePlan)
+        public async Task<IActionResult> Create([Bind("DegreePlanId,StudentId,DegreePlanAbbr,DegreePlanName,DegreeId,Done")] DegreePlan degreePlan)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +67,7 @@ namespace WebApplication1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DegreeId"] = new SelectList(_context.Degrees, "DegreeId", "DegreeId", degreePlan.DegreeId);
             ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", degreePlan.StudentId);
             return View(degreePlan);
         }
@@ -94,18 +75,17 @@ namespace WebApplication1.Controllers
         // GET: DegreePlans/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) { return NotFound(); }
+            var studentDegreePlan = await _context.DegreePlans
+                .Include(p => p.Degree).ThenInclude(pd => pd.Credits)
+                .Include(p => p.Student)
+                .Include(p => p.StudentTerms).ThenInclude(pt => pt.Slots)
+                .SingleOrDefaultAsync(m => m.DegreePlanId == id);
 
-            var degreePlan = await _context.DegreePlans.FindAsync(id);
-            if (degreePlan == null)
-            {
-                return NotFound();
-            }
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", degreePlan.StudentId);
-            return View(degreePlan);
+            if (studentDegreePlan == null) { return NotFound(); }
+            ViewData["DegreeId"] = new SelectList(_context.Degrees, "DegreeId", "DegreeAbrrev", studentDegreePlan.DegreeId);
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "First", studentDegreePlan.StudentId);
+            return View(studentDegreePlan);
         }
 
         // POST: DegreePlans/Edit/5
@@ -113,7 +93,7 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DegreePlanId,StudentId,DegreePlanAbbr,DegreePlanName")] DegreePlan degreePlan)
+        public async Task<IActionResult> Edit(int id, [Bind("DegreePlanId,StudentId,DegreePlanAbbr,DegreePlanName,DegreeId,Done")] DegreePlan degreePlan)
         {
             if (id != degreePlan.DegreePlanId)
             {
@@ -140,6 +120,7 @@ namespace WebApplication1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DegreeId"] = new SelectList(_context.Degrees, "DegreeId", "DegreeId", degreePlan.DegreeId);
             ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", degreePlan.StudentId);
             return View(degreePlan);
         }
@@ -153,6 +134,7 @@ namespace WebApplication1.Controllers
             }
 
             var degreePlan = await _context.DegreePlans
+                .Include(d => d.Degree)
                 .Include(d => d.Student)
                 .FirstOrDefaultAsync(m => m.DegreePlanId == id);
             if (degreePlan == null)

@@ -20,35 +20,9 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index(String sortOrder, string searchString)
+        public async Task<IActionResult> Index()
         {
-           ViewData["FamilySortParm"] = String.IsNullOrEmpty(sortOrder) ? "Fname_desc" : "";
-            ViewData["GivenSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Gname_desc" : "";
-            ViewData["N919SortParm"] = sortOrder == "N919" ? "N919_desc" : "N919_desc";
-            ViewData["CurrentFilter"] = searchString;
-            var students = from s in _context.Students
-                          select s;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                students = students.Where(s => s.Family.Contains(searchString)
-                                       || s.Given.Contains(searchString));
-            }
-            switch (sortOrder)
-            {
-                case "Fname_desc":
-                    students = students.OrderByDescending(s => s.Family);
-                    break;
-                case "Gname_desc":
-                    students = students.OrderBy(s => s.Given);
-                    break;
-                case "N919_desc":
-                    students = students.OrderByDescending(s => s.N919);
-                    break;
-                default:
-                    students = students.OrderBy(s => s.StudentId);
-                    break;
-            }
-            return View(await students.AsNoTracking().ToListAsync());
+            return View(await _context.Students.ToListAsync());
         }
 
         // GET: Students/Details/5
@@ -60,8 +34,8 @@ namespace WebApplication1.Controllers
             }
 
             var student = await _context.Students
-                .Include (d => d.DegreePlans)
-                .SingleOrDefaultAsync(m => m.StudentId == id);
+                .Include(d => d.DegreePlans)
+                .FirstOrDefaultAsync(m => m.StudentId == id);
             if (student == null)
             {
                 return NotFound();
@@ -113,7 +87,7 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StudentId,Family,Given,N919")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("StudentId,Family,Given,N919,Done")] Student student)
         {
             if (id != student.StudentId)
             {

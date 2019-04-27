@@ -9,28 +9,15 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
-        </p>
-    </div>
-</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["AbvSortParm"]">@Html.DisplayNameFor(model => model.CreditAbbr)</a>
+                @Html.DisplayNameFor(model => model.CreditAbbr)
             </th>
             <th>
-
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CreditAbbr"]">@Html.DisplayNameFor(model => model.CreditAbbr)</a>
-
+                @Html.DisplayNameFor(model => model.CreditName)
             </th>
-      
             <th>
                 @Html.DisplayNameFor(model => model.IsSummer)
             </th>
@@ -41,7 +28,7 @@
                 @Html.DisplayNameFor(model => model.IsFall)
             </th>
             <th>
-                 @Html.DisplayNameFor(model => model.Done)
+                @Html.DisplayNameFor(model => model.Degree)
             </th>
             <th></th>
         </tr>
@@ -65,7 +52,7 @@
                 @Html.DisplayFor(modelItem => item.IsFall)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Done)
+                @Html.DisplayFor(modelItem => item.Degree.DegreeId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CreditId">Edit</a> |
