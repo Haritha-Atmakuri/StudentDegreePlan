@@ -83,8 +83,8 @@ namespace WebApplication1.Controllers
                 .SingleOrDefaultAsync(m => m.DegreePlanId == id);
 
             if (studentDegreePlan == null) { return NotFound(); }
-            ViewData["DegreeId"] = new SelectList(_context.Degrees, "DegreeId", "DegreeAbrrev", studentDegreePlan.DegreeId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "First", studentDegreePlan.StudentId);
+            ViewData["DegreeId"] = new SelectList(_context.Degrees, "DegreeId", "DegreeAbbr", studentDegreePlan.DegreeId);
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "Given", studentDegreePlan.StudentId);
             return View(studentDegreePlan);
         }
 
